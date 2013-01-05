@@ -2,6 +2,8 @@
     "name": "carew/plugin-toc",
     "description": "Toc plugin for carew",
     "license": "MIT",
+    "homepage": "http://carew.github.com/",
+    "keywords": ["carew"],
     "authors": [
         {
             "name": "Grégoire Pineau",

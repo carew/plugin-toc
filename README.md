@@ -7,7 +7,7 @@ Installation
 Install it with composer:
 
 ```
-composer require lyrixx/plugin-toc:dev-master
+composer require carew/plugin-toc:dev-master
 ```
 
 Then configure `config.yml`
