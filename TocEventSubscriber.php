@@ -29,7 +29,7 @@ class TocEventSubscriber implements EventSubscriberInterface
         }
 
         $dom = new \DOMDocument();
-        $dom->loadHtml($body);
+        $dom->loadHtml('<?xml encoding="UTF-8">'.$body);
         $xpath = new \DOMXPath($dom);
 
         $toc = array();
