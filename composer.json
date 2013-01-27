@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "carew/carew": "*"
+        "carew/carew": "~1.5"
     },
     "autoload": {
         "psr-0": { "Carew\\Plugin\\Toc": ""}
