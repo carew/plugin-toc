@@ -2,7 +2,7 @@
 
 namespace Carew\Plugin\Toc;
 
-use Carew\Events;
+use Carew\Event\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class TocEventSubscriber implements EventSubscriberInterface
