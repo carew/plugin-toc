@@ -3,26 +3,34 @@
 namespace Carew\Plugin\Toc;
 
 use Carew\Event\Events;
+use Carew\Document;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class TocEventSubscriber implements EventSubscriberInterface
 {
+    public function onDocument($event)
+    {
+        $document  = $event->getSubject();
+
+        if (Document::TYPE_POST == $document->getType()) {
+            $this->buildToc($document);
+        } elseif (Document::TYPE_PAGE == $document->getType()) {
+            $this->buildToc($document);
+        }
+    }
+
     public static function getSubscribedEvents()
     {
         return array(
-            Events::PAGE => array(
-                array('buildToc', static::getPriority()),
+            Events::DOCUMENT => array(
+                array('onDocument', 256),
             ),
-            Events::POST => array(
-                array('buildToc', static::getPriority()),
-            )
         );
     }
 
-    public function buildToc($event)
+    private function buildToc($document)
     {
-        $subject = $event->getSubject();
-        $body = $subject->getBody();
+        $body = $document->getBody();
 
         if (preg_match('/^(\s|\n)+$/', $body)) {
             return;
@@ -115,12 +123,7 @@ class TocEventSubscriber implements EventSubscriberInterface
         $body = $dom->saveHtml();
         $body = preg_replace('{.*<body>(.*)</body>.*}is', '$1', $body);
 
-        $subject->setToc($toc);
-        $subject->setBody($body);
-    }
-
-    public static function getPriority()
-    {
-        return 128;
+        $document->setToc($toc);
+        $document->setBody($body);
     }
 }
